@@ -98,7 +98,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Proceso", "Peso"
+                "Recurso", "Estado", "Procesos"
             }
         ));
         jScrollPane8.setViewportView(jTable8);
