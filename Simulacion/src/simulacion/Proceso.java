@@ -19,6 +19,16 @@ public class Proceso {
         this.recursos = recursos;
     }
 
+    public Proceso(String estado, int tamano, String nombre, String recursos) {
+        this.estado = estado;
+        this.tamano = tamano;
+        this.nombre = nombre;
+        this.recursos = recursos;
+    }
+
+    public Proceso() {
+    }
+
     public String getEstado() {
         return estado;
     }
