@@ -55,9 +55,21 @@ public class Principal extends javax.swing.JFrame {
        DefaultTableModel modelo = (DefaultTableModel) this.tablaNuevo.getModel();
         modelo.getDataVector().clear();
         if (prosesosN != null) {
-             System.out.println("tamano de la lista"+prosesosN.size());
             for (Proceso pro : prosesosN) {
+                if(pro.getEstado().equals("nuevo")){
                 modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+                }
+            }
+        }
+    }
+    
+    private void llenarListaPro(){
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaListaPro.getModel();
+        modelo.getDataVector().clear();
+        if (prosesosN != null) {
+            for (Proceso pro : prosesosN) {
+                modelo.addRow(new Object[]{pro.getId(), pro.getNombre(), pro.getTamano(), pro.getNoHilos(), pro.getRecursos()
+                , pro.getEstado()});
             }
         }
     }
@@ -295,6 +307,7 @@ public class Principal extends javax.swing.JFrame {
        Vista_Chiquita ob= new Vista_Chiquita(this,true);
        ob.show();
        llenarnuevo();
+       llenarListaPro();
     }//GEN-LAST:event_butonNuevoActionPerformed
 
     /**
