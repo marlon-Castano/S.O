@@ -8,6 +8,7 @@ package Vista;
 import java.util.ArrayList;
 import java.util.List;
 import simulacion.Proceso;
+import simulacion.Simulacion;
 
 /**
  *
@@ -278,15 +279,18 @@ public class Vista_Chiquita extends javax.swing.JDialog {
     }//GEN-LAST:event_Recurso2ActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        Proceso proceso;
+        
+        Proceso proceso= new Proceso();
         String recursos;
         recursos= validarChec();
         int id =Integer.parseInt(id_proceso.getText());
         String nombre =this.nombre.getText();
         int tamano =Integer.parseInt(this.tamano.getText());
         proceso= new Proceso("nuevo", tamano, nombre, id, 1, recursos);
-        agregarProcesos(proceso);
-        limpiarvista();
+        simulacion.Simulacion.principal.setProceso(proceso);
+        dispose();
+        /*agregarProcesos(proceso);
+        limpiarvista();*/
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void Recurso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Recurso1ActionPerformed
@@ -302,10 +306,9 @@ public class Vista_Chiquita extends javax.swing.JDialog {
     }//GEN-LAST:event_id_procesoActionPerformed
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-        Principal ob = new Principal(prosesos);
+       Principal ob = new Principal(prosesos);
         ob.setVisible(true);
         dispose();
-        
     }//GEN-LAST:event_botonVolverActionPerformed
 
     /**

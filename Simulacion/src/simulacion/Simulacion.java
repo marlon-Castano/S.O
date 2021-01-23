@@ -5,17 +5,20 @@
  */
 package simulacion;
 
+import Vista.Principal;
+
 /**
  *
  * @author ASUS
  */
 public class Simulacion {
 
+   public static Principal principal = new Principal();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       principal.show();
     }
     
 }
