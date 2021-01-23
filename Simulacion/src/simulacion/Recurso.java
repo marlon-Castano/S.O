@@ -13,6 +13,10 @@ public class Recurso {
         this.estado = estado;
     }
 
+    public Recurso() {
+    }
+    
+
     public Proceso getProceso() {
         return proceso;
     }
