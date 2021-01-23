@@ -6,9 +6,13 @@
 package Vista;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import simulacion.Proceso;
+import simulacion.Recurso;
 
 /**
  *
@@ -16,17 +20,38 @@ import simulacion.Proceso;
  */
 public class Principal extends javax.swing.JFrame {
 
-   private static List<Proceso> prosesosN = new ArrayList<>();
-   private DefaultTableModel tb ;
+    private static List<Proceso> nuevo = new ArrayList<>();
+    private static List<Proceso> prosesosN = new ArrayList<>();
+    private static List<Proceso> listo = new ArrayList<>();
+    private static List<Proceso> bloqueado = new ArrayList<>();
+    private static List<Proceso> terminado = new ArrayList<>();
+    private static List<Proceso> ejecucion = new ArrayList<>();
+    private static List<Recurso> recursos = new ArrayList<>();
+    Recurso ob = new Recurso(null, "R1", true);
+    Recurso ob1 = new Recurso(null, "R2", true);
+    Recurso ob2 = new Recurso(null, "R3", true);
+    Recurso ob3 = new Recurso(null, "R4", true);
+    Recurso ob4 = new Recurso(null, "R5", true);
+    Recurso ob5 = new Recurso(null, "R6", true);
 
-   public List getProceso(){
-       return prosesosN;
-   }
-   public void setProceso(Proceso procesos){
-       prosesosN.add(procesos);
-       System.out.println("agrego tamano de la lista es "+ prosesosN.size());
-   }
-   
+    public void llenar_recursos() {
+        recursos.add(ob);
+        recursos.add(ob1);
+        recursos.add(ob2);
+        recursos.add(ob3);
+        recursos.add(ob4);
+        recursos.add(ob5);
+    }
+
+    public List getProceso() {
+        return prosesosN;
+    }
+
+    public void setProceso(Proceso procesos) {
+        prosesosN.add(procesos);
+        System.out.println("agrego tamano de la lista es " + prosesosN.size());
+    }
+
     public List<Proceso> getProsesosN() {
         return prosesosN;
     }
@@ -34,42 +59,65 @@ public class Principal extends javax.swing.JFrame {
     public void setProsesosN(List<Proceso> prosesosN) {
         this.prosesosN = prosesosN;
     }
-    
+
     /*
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
         llenarnuevo();
+        llenar_recursos();
     }
 
     public Principal(List<Proceso> lista) {
         initComponents();
-        prosesosN=lista;
+        prosesosN = lista;
         llenarnuevo();
-        
+
     }
-   
+
     private void llenarnuevo() {
-       
-       DefaultTableModel modelo = (DefaultTableModel) this.tablaNuevo.getModel();
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaNuevo.getModel();
         modelo.getDataVector().clear();
         if (prosesosN != null) {
             for (Proceso pro : prosesosN) {
-                if(pro.getEstado().equals("nuevo")){
-                modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+                if (pro.getEstado().equals("nuevo")) {
+                    modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
                 }
             }
         }
     }
-    
-    private void llenarListaPro(){
+
+    private void llenarlisto(Proceso pro) {
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tablalisto.getModel();
+
+        if (pro.getEstado().equals("listo")) {
+            modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+
+        }
+
+    }
+
+    private void llenarejecucion(Proceso pro) {
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaEnproceso.getModel();
+
+        if (pro.getEstado().equals("ejecucion")) {
+            modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+
+        }
+
+    }
+
+    private void llenarListaPro() {
         DefaultTableModel modelo = (DefaultTableModel) this.tablaListaPro.getModel();
         modelo.getDataVector().clear();
         if (prosesosN != null) {
             for (Proceso pro : prosesosN) {
-                modelo.addRow(new Object[]{pro.getId(), pro.getNombre(), pro.getTamano(), pro.getNoHilos(), pro.getRecursos()
-                , pro.getEstado()});
+                modelo.addRow(new Object[]{pro.getId(), pro.getNombre(), pro.getTamano(), pro.getNoHilos(), pro.getRecursos(),
+                     pro.getEstado()});
             }
         }
     }
@@ -201,6 +249,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         botonEjecutar.setText("Ejecutar");
+        botonEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEjecutarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,11 +357,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void butonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonNuevoActionPerformed
 
-       Vista_Chiquita ob= new Vista_Chiquita(this,true);
-       ob.show();
-       llenarnuevo();
-       llenarListaPro();
+        Vista_Chiquita ob = new Vista_Chiquita(this, true);
+        ob.show();
+        llenarnuevo();
+        llenarListaPro();
     }//GEN-LAST:event_butonNuevoActionPerformed
+
+    private void botonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarActionPerformed
+        Ejecutar();
+    }//GEN-LAST:event_botonEjecutarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,6 +402,82 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    public void Thread() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void Ejecutar() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (listo != null || bloqueado != null || nuevo != null) {
+                    for (Proceso pro : prosesosN) {
+                        if (pro.getEstado().equals("nuevo")) {
+                            nuevo.add(pro);
+
+                        }
+                    }
+                    for (Proceso pro : nuevo) {
+                        Proceso aux =pro; 
+                        aux.setEstado("listo");
+                        listo.add(aux);
+                        nuevo.remove(pro);
+                        llenarlisto(pro);
+                        Thread();
+                    }
+                    llenarListaPro();
+
+                    for (Proceso pro : listo) {
+                        if (ejecucion == null & validaEjecu(pro) == true) {
+                            pro.setEstado("ejecucion");
+                            ejecucion.add(pro);
+                            listo.remove(pro);
+                            llenarejecucion(pro);
+                        }
+                    }
+                    //llenar lista ejecucion
+                    llenarListaPro();
+
+                }
+            }
+        }.start();
+
+    }
+
+    public boolean validaEjecu(Proceso pro) {
+        String[] recursosPro = pro.getRecursos().split(" ");
+
+        int estado = 0;
+        for (Recurso rec : recursos) {
+            for (String recPro : recursosPro) {
+                if (recPro.equals(rec.getNombre())) {
+                    if (!rec.isEstado()) {
+                        estado++;
+                    }
+                }
+            }
+
+        }
+        if (estado == 0) {
+            for (Recurso rec : recursos) {
+                for (String recPro : recursosPro) {
+                    if (recPro.equals(rec.getNombre())) {
+                        rec.setProceso(pro);
+                        rec.setEstado(false);
+                        //recursos.remove(rec);
+                        //recursos.add(rec);
+                    }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEjecutar;
     private javax.swing.JButton butonNuevo;
