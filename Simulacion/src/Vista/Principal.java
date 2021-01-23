@@ -16,9 +16,17 @@ import simulacion.Proceso;
  */
 public class Principal extends javax.swing.JFrame {
 
-   private List<Proceso> prosesosN;
+   private static List<Proceso> prosesosN = new ArrayList<>();
    private DefaultTableModel tb ;
 
+   public List getProceso(){
+       return prosesosN;
+   }
+   public void setProceso(Proceso procesos){
+       prosesosN.add(procesos);
+       System.out.println("agrego tamano de la lista es "+ prosesosN.size());
+   }
+   
     public List<Proceso> getProsesosN() {
         return prosesosN;
     }
@@ -285,8 +293,8 @@ public class Principal extends javax.swing.JFrame {
     private void butonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonNuevoActionPerformed
 
        Vista_Chiquita ob= new Vista_Chiquita(this,true);
-       ob.setVisible(true);
-        dispose();
+       ob.show();
+       llenarnuevo();
     }//GEN-LAST:event_butonNuevoActionPerformed
 
     /**
