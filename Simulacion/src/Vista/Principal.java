@@ -8,6 +8,7 @@ package Vista;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -49,7 +50,7 @@ public class Principal extends javax.swing.JFrame {
 
     public void setProceso(Proceso procesos) {
         prosesosN.add(procesos);
-        System.out.println("agrego tamano de la lista es " + prosesosN.size());
+
     }
 
     public List<Proceso> getProsesosN() {
@@ -111,16 +112,62 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
+    private void llenarbloq(Proceso pro) {
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaBloeado.getModel();
+
+        if (pro.getEstado().equals("bloqueado")) {
+            modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+
+        }
+
+    }
+
     private void llenarListaPro() {
         DefaultTableModel modelo = (DefaultTableModel) this.tablaListaPro.getModel();
         modelo.getDataVector().clear();
         if (prosesosN != null) {
             for (Proceso pro : prosesosN) {
                 modelo.addRow(new Object[]{pro.getId(), pro.getNombre(), pro.getTamano(), pro.getNoHilos(), pro.getRecursos(),
-                     pro.getEstado()});
+                    pro.getEstado()});
             }
         }
     }
+
+    private void llenarterm(Proceso pro) {
+
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaTerminado.getModel();
+
+        if (pro.getEstado().equals("terminado")) {
+            modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+
+        }
+
+    }
+private void limpiarlisto() {
+ DefaultTableModel modelo = (DefaultTableModel) this.tablalisto.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);}
+}
+private void limpiarBloqueado() {
+ DefaultTableModel modelo = (DefaultTableModel) this.tablaBloeado.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);}
+}
+private void limpiarejecucion() {
+ DefaultTableModel modelo = (DefaultTableModel) this.tablaEnproceso.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);}
+}
+private void limpiarnuevo() {
+ DefaultTableModel modelo = (DefaultTableModel) this.tablaNuevo.getModel();
+        
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);}
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -364,6 +411,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_butonNuevoActionPerformed
 
     private void botonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarActionPerformed
+        Proceso aux = new Proceso();
+        for (Proceso pro : prosesosN) {
+            pro.setEstado("listo");
+            llenarlisto(pro);
+        }
+        llenarListaPro();
+
         Ejecutar();
     }//GEN-LAST:event_botonEjecutarActionPerformed
 
@@ -404,7 +458,7 @@ public class Principal extends javax.swing.JFrame {
 
     public void Thread() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -414,62 +468,131 @@ public class Principal extends javax.swing.JFrame {
         new Thread() {
             @Override
             public void run() {
-                while (listo != null || bloqueado != null || nuevo != null) {
+                while (tablalisto.getModel().getRowCount()!=0) {
                     for (Proceso pro : prosesosN) {
-                        if (pro.getEstado().equals("nuevo")) {
-                            nuevo.add(pro);
+                        if(validarRecursos(pro)){
+                            pro.setEstado("listo");
+                        }
+                        if (pro.getEstado().equals("listo")) {
+                            if (validaEjecu(pro)) {
+                                if(pro.getTamano()!=0){
+                                pro.setEstado("ejecucion");
+                                llenarejecucion(pro);
+                                llenarListaPro();
+                                Thread();
+                                pro.setTamano(pro.getTamano() - 1);
+                                
+                                if (ramdon() == true) {
+                                    liberarRecursos();
+                                    limpiarBloqueado();
+                                    pasarListo();
+                                }
 
+                                if (pro.getTamano() != 0) {
+                                    pro.setEstado("listo");
+                                    limpiarejecucion();
+                                } else {
+                                    pro.setEstado("terminado");
+                                    liberarRecursos();
+                                    llenarterm(pro);
+                                    limpiarejecucion();
+                                }
+                                llenarListaPro();
+                                }else{
+                                    break;
+                                }    
+                            } else {
+                                pro.setEstado("bloqueado");
+                                llenarbloq(pro);
+                                llenarListaPro();
+                            }
+                        } else {
+                            //poner que no hay procesos para jecutar
                         }
                     }
-                    for (Proceso pro : nuevo) {
-                        Proceso aux =pro; 
-                        aux.setEstado("listo");
-                        listo.add(aux);
-                        nuevo.remove(pro);
-                        llenarlisto(pro);
-                        Thread();
-                    }
-                    llenarListaPro();
-
-                    for (Proceso pro : listo) {
-                        if (ejecucion == null & validaEjecu(pro) == true) {
-                            pro.setEstado("ejecucion");
-                            ejecucion.add(pro);
-                            listo.remove(pro);
-                            llenarejecucion(pro);
-                        }
-                    }
-                    //llenar lista ejecucion
-                    llenarListaPro();
-
                 }
             }
         }.start();
 
     }
 
-    public boolean validaEjecu(Proceso pro) {
+    private void liberarRecursos() {
+        for (Recurso re : recursos) {
+            re.setEstado(true);
+            re.setProceso(null);
+        }
+    }
+
+    private void pasarListo() {
+        for (Proceso pro : prosesosN) {
+            if (pro.getEstado().equals("bloqueado")) {
+                pro.setEstado("listo");
+                llenarlisto(pro);
+            }
+        }
+    }
+
+    public boolean ramdon() {
+        int numero = (int) (Math.random() * 2 + 1);
+        if (numero == 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarRecursos(Proceso pro) {
         String[] recursosPro = pro.getRecursos().split(" ");
 
         int estado = 0;
-        for (Recurso rec : recursos) {
+        ///si no hay un recurso disponible
+        for (int i = 0; i < recursos.size(); i++) {
             for (String recPro : recursosPro) {
-                if (recPro.equals(rec.getNombre())) {
-                    if (!rec.isEstado()) {
+                if (recPro.equals(recursos.get(i).getNombre())) {
+                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()!=pro.getId()) {
                         estado++;
+                    }
+                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()==pro.getId()){
+                        return true;
                     }
                 }
             }
 
         }
+        if(estado==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean validaEjecu(Proceso pro) {
+        String[] recursosPro = pro.getRecursos().split(" ");
+
+        int estado = 0;
+        ///si no hay un recurso disponible
+        for (int i = 0; i < recursos.size(); i++) {
+            for (String recPro : recursosPro) {
+                if (recPro.equals(recursos.get(i).getNombre())) {
+                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()!=pro.getId()) {
+                        estado++;
+                    }
+                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()==pro.getId()){
+                        return true;
+                    }
+                }
+            }
+
+        }
+        Recurso aux = new Recurso();
         if (estado == 0) {
-            for (Recurso rec : recursos) {
+            for (int i = 0; i < recursos.size(); i++) {
                 for (String recPro : recursosPro) {
-                    if (recPro.equals(rec.getNombre())) {
-                        rec.setProceso(pro);
-                        rec.setEstado(false);
-                        //recursos.remove(rec);
-                        //recursos.add(rec);
+                    if (recPro.equals(recursos.get(i).getNombre())) {
+                        aux = recursos.get(i);
+                        aux.setProceso(pro);
+                        aux.setEstado(false);
+                        recursos.remove(i);
+                        recursos.add(aux);
                     }
                 }
             }
