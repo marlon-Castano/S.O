@@ -76,6 +76,12 @@ public class Proceso {
     public void setRecursos(String recursos) {
         this.recursos = recursos;
     }
+
+    @Override
+    public String toString() {
+        return "Proceso{" + "estado=" + estado + ", tamano=" + tamano + ", nombre=" + nombre + ", id=" + id + ", NoHilos=" + NoHilos + ", recursos=" + recursos + '}';
+    }
+    
     
     
     

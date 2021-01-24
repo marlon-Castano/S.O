@@ -67,7 +67,6 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         llenarnuevo();
-        llenar_recursos();
     }
 
     public Principal(List<Proceso> lista) {
@@ -91,17 +90,16 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void llenarlisto() {
-        
+
         DefaultTableModel modelo = (DefaultTableModel) this.tablalisto.getModel();
-        int c=0;
-        for(int i = 0; i <modelo.getRowCount();i++){
-            modelo.removeRow(0);}
-        for(Proceso pro: prosesosN){
+        int c = 0;
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(0);
+        }
+        for (Proceso pro : prosesosN) {
             if (pro.getEstado().equals("listo")) {
                 c++;
-                System.out.println(c);
                 modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
-
             }
         }
 
@@ -110,10 +108,10 @@ public class Principal extends javax.swing.JFrame {
     private void llenarejecucion() {
 
         DefaultTableModel modelo = (DefaultTableModel) this.tablaEnproceso.getModel();
-        for(Proceso pro: prosesosN){
+        for (Proceso pro : prosesosN) {
             if (pro.getEstado().equals("ejecucion")) {
                 modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
-            
+
             }
         }
 
@@ -122,9 +120,9 @@ public class Principal extends javax.swing.JFrame {
     private void llenarbloq() {
 
         DefaultTableModel modelo = (DefaultTableModel) this.tablaBloeado.getModel();
-        for(Proceso pro: prosesosN){
+        for (Proceso pro : prosesosN) {
             if (pro.getEstado().equals("bloqueado")) {
-            modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
+                modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
             }
         }
 
@@ -141,39 +139,70 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    private void llenarRecursos() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablarecursos.getModel();
+        modelo.getDataVector().clear();
+        if (recursos != null) {
+            for (Recurso re : recursos) {
+                if (re.getProceso() == null) {
+                    modelo.addRow(new Object[]{re.getNombre(), re.isEstado(), "vacio"});
+                } else {
+                    modelo.addRow(new Object[]{re.getNombre(), re.isEstado(), re.getProceso().getNombre()});
+                }
+
+            }
+        }
+    }
+
     private void llenarterm() {
 
         DefaultTableModel modelo = (DefaultTableModel) this.tablaTerminado.getModel();
-        for(Proceso pro: prosesosN){
+        for (Proceso pro : prosesosN) {
             if (pro.getEstado().equals("terminado")) {
                 modelo.addRow(new Object[]{pro.getNombre(), pro.getTamano()});
             }
         }
 
     }
-private void limpiarlisto() {
- DefaultTableModel modelo = (DefaultTableModel) this.tablalisto.getModel();
-        
-        for(int i = 0; i <modelo.getRowCount();i++){
-            modelo.removeRow(0);}
-}
-private void limpiarBloqueado() {
- DefaultTableModel modelo = (DefaultTableModel) this.tablaBloeado.getModel();
-        for(int i = 0; i <modelo.getRowCount();i++){
-            modelo.removeRow(0);}
-}
-private void limpiarejecucion() {
- DefaultTableModel modelo = (DefaultTableModel) this.tablaEnproceso.getModel();
-        
-        for(int i = 0; i <modelo.getRowCount();i++){
-            modelo.removeRow(0);}
-}
-private void limpiarnuevo() {
- DefaultTableModel modelo = (DefaultTableModel) this.tablaNuevo.getModel();
-        
-        for(int i = 0; i <modelo.getRowCount();i++){
-            modelo.removeRow(0);}
-}
+
+    private void limpiarlisto() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablalisto.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void limpiarBloqueado() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaBloeado.getModel();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void limpiarejecucion() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaEnproceso.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void limpiarnuevo() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaNuevo.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void limpiarREcursos() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablarecursos.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -412,15 +441,20 @@ private void limpiarnuevo() {
     }//GEN-LAST:event_butonNuevoActionPerformed
 
     private void botonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarActionPerformed
+        llenar_recursos();
         Proceso aux = new Proceso();
         limpiarnuevo();
         for (Proceso pro : prosesosN) {
             pro.setEstado("listo");
             llenarlisto();
         }
+        limpiarnuevo();
         llenarListaPro();
 
         Ejecutar();
+        for(Proceso pro: prosesosN){
+            pro.toString();
+        }
     }//GEN-LAST:event_botonEjecutarActionPerformed
 
     public static void main(String args[]) {
@@ -444,43 +478,49 @@ private void limpiarnuevo() {
         new Thread() {
             @Override
             public void run() {
-                while (tablalisto.getModel().getRowCount()!=0) {
+                while (tablalisto.getModel().getRowCount() != 0) {
                     for (Proceso pro : prosesosN) {
-                        if(validarRecursos(pro)){
+                        if (validarRecursos(pro) && pro.getTamano()>0) {
                             pro.setEstado("listo");
                         }
-                        if (pro.getEstado().equals("listo")) {
+                        if (pro.getEstado().equals("listo") && pro.getTamano() > 0) {
                             if (validaEjecu(pro)) {
-                                if(pro.getTamano()!=0){
-                                pro.setEstado("ejecucion");
-                                llenarListaPro();
-                                llenarlisto();
-                                llenarejecucion();
-                                Thread();                                
-                                pro.setTamano(pro.getTamano() - 1);
-                                
-                                if (ramdon() == true) {
-                                    liberarRecursos();
-                                    limpiarBloqueado();
-                                    pasarListo();
-                                    llenarlisto();
-                                }
-
                                 if (pro.getTamano() != 0) {
-                                    pro.setEstado("listo");
-                                    limpiarejecucion();
+                                    pro.setEstado("ejecucion");
+                                    limpiarREcursos();
+                                    llenarRecursos();
+                                    llenarListaPro();
+                                    limpiarlisto();
                                     llenarlisto();
+                                    llenarejecucion();
+                                    Thread();
+                                    pro.setTamano(pro.getTamano() - 1);
+
+                                    if (ramdon() == true) {
+                                        limpiarREcursos();
+                                        llenarRecursos();
+                                        liberarRecursos();
+                                        limpiarBloqueado();
+                                        pasarListo();
+                                        llenarlisto();
+                                    }
+
+                                    if (pro.getTamano() > 0) {
+                                        pro.setEstado("listo");
+                                        limpiarejecucion();
+                                        llenarlisto();
+                                    } else {
+                                        pro.setEstado("terminado");
+                                        liberarRecursos();
+                                        llenarterm();
+                                        limpiarejecucion();
+                                        limpiarBloqueado();
+                                        llenarRecursos();
+                                    }
+                                    llenarListaPro();
                                 } else {
-                                    pro.setEstado("terminado");
-                                    liberarRecursos();
-                                    llenarterm();
-                                    limpiarejecucion();
-                                    limpiarBloqueado();
-                                }
-                                llenarListaPro();
-                                }else{
                                     break;
-                                }    
+                                }
                             } else {
                                 pro.setEstado("bloqueado");
                                 llenarbloq();
@@ -507,19 +547,22 @@ private void limpiarnuevo() {
         for (Proceso pro : prosesosN) {
             if (pro.getEstado().equals("bloqueado")) {
                 pro.setEstado("listo");
-                llenarlisto(pro);
             }
         }
+        limpiarlisto();
+        llenarlisto();
     }
 
     public boolean ramdon() {
         int numero = (int) (Math.random() * 2 + 1);
-        if (numero == 3) {
+        if (numero ==3) {
+            System.out.println("va a limpar recursos");
             return true;
         } else {
             return false;
         }
     }
+
     public boolean validarRecursos(Proceso pro) {
         String[] recursosPro = pro.getRecursos().split(" ");
 
@@ -528,19 +571,19 @@ private void limpiarnuevo() {
         for (int i = 0; i < recursos.size(); i++) {
             for (String recPro : recursosPro) {
                 if (recPro.equals(recursos.get(i).getNombre())) {
-                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()!=pro.getId()) {
+                    if (recursos.get(i).isEstado() != true && recursos.get(i).getProceso().getId() != pro.getId()) {
                         estado++;
                     }
-                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()==pro.getId()){
+                    if (recursos.get(i).isEstado() != true && recursos.get(i).getProceso().getId() == pro.getId()) {
                         return true;
                     }
                 }
             }
 
         }
-        if(estado==0){
+        if (estado == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -553,10 +596,10 @@ private void limpiarnuevo() {
         for (int i = 0; i < recursos.size(); i++) {
             for (String recPro : recursosPro) {
                 if (recPro.equals(recursos.get(i).getNombre())) {
-                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()!=pro.getId()) {
+                    if (recursos.get(i).isEstado() != true && recursos.get(i).getProceso().getId() != pro.getId()) {
                         estado++;
                     }
-                    if (recursos.get(i).isEstado()!=true && recursos.get(i).getProceso().getId()==pro.getId()){
+                    if (recursos.get(i).isEstado() != true && recursos.get(i).getProceso().getId() == pro.getId()) {
                         return true;
                     }
                 }
@@ -568,11 +611,8 @@ private void limpiarnuevo() {
             for (int i = 0; i < recursos.size(); i++) {
                 for (String recPro : recursosPro) {
                     if (recPro.equals(recursos.get(i).getNombre())) {
-                        aux = recursos.get(i);
-                        aux.setProceso(pro);
-                        aux.setEstado(false);
-                        recursos.remove(i);
-                        recursos.add(aux);
+                        recursos.get(i).setProceso(pro);
+                        recursos.get(i).setEstado(false);
                     }
                 }
             }

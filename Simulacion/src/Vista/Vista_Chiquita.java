@@ -100,7 +100,6 @@ public class Vista_Chiquita extends javax.swing.JDialog {
         Recurso6 = new javax.swing.JCheckBox();
         Recurso1 = new javax.swing.JCheckBox();
         botonAceptar = new javax.swing.JButton();
-        botonVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -229,13 +228,6 @@ public class Vista_Chiquita extends javax.swing.JDialog {
             }
         });
 
-        botonVolver.setText("Volver");
-        botonVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVolverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,17 +238,14 @@ public class Vista_Chiquita extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(botonAceptar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(botonVolver)))
+                        .addGap(37, 37, 37)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonAceptar)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,9 +255,7 @@ public class Vista_Chiquita extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAceptar)
-                    .addComponent(botonVolver)))
+                .addComponent(botonAceptar))
         );
 
         pack();
@@ -304,12 +291,6 @@ public class Vista_Chiquita extends javax.swing.JDialog {
     private void id_procesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_procesoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_id_procesoActionPerformed
-
-    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-       Principal ob = new Principal(prosesos);
-        ob.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,7 +342,6 @@ public class Vista_Chiquita extends javax.swing.JDialog {
     private javax.swing.JCheckBox Recurso5;
     private javax.swing.JCheckBox Recurso6;
     private javax.swing.JButton botonAceptar;
-    private javax.swing.JButton botonVolver;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField id_proceso;
     private javax.swing.JLabel jLabel1;
