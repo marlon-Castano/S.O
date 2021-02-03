@@ -203,6 +203,13 @@ public class Principal extends javax.swing.JFrame {
             modelo.removeRow(i);
         }
     }
+    private void limpiarTerminado() {
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaTerminado.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -521,14 +528,23 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_butonNuevoActionPerformed
 
     private void botonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarActionPerformed
-        limpiarREcursos();
-        llenar_recursos();
+        if(recursos.size()==0){
+            System.out.println("entro");
+            llenar_recursos();
+        }
+        
+   
+            
+        
         Proceso aux = new Proceso();
         limpiarnuevo();
         for (Proceso pro : prosesosN) {
+            if(pro.getEstado().equals("nuevo")){
             pro.setEstado("listo");
-            llenarlisto();
+            
+            }
         }
+        llenarlisto();
         limpiarnuevo();
         llenarListaPro();
 
@@ -593,7 +609,9 @@ public class Principal extends javax.swing.JFrame {
                                     } else {
                                         pro.setEstado("terminado");
                                         liberarRecursos();
+                                        limpiarTerminado();
                                         llenarterm();
+                                        
                                         limpiarejecucion();
                                         limpiarBloqueado();
                                         llenarRecursos();
