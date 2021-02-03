@@ -119,12 +119,27 @@ public class Vista_Chiquita extends javax.swing.JDialog {
                 id_procesoActionPerformed(evt);
             }
         });
+        id_proceso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                id_procesoKeyTyped(evt);
+            }
+        });
 
         nombre.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
         nombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
 
         tamano.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
         tamano.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tamano.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tamanoKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel1.setText("Id proceso");
@@ -338,6 +353,32 @@ catch (Exception e){
     private void id_procesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_procesoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_id_procesoActionPerformed
+
+    private void id_procesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_procesoKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            
+            evt.consume();
+        }else if(evt.getKeyChar()>32 && evt.getKeyChar()<=47){
+            evt.consume();
+        }
+    }//GEN-LAST:event_id_procesoKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreKeyTyped
+
+    private void tamanoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tamanoKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            
+            evt.consume();
+        }else if(evt.getKeyChar()>32 && evt.getKeyChar()<=47){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tamanoKeyTyped
 
     /**
      * @param args the command line arguments
