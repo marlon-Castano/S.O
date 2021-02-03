@@ -303,6 +303,10 @@ public class Vista_Chiquita extends javax.swing.JDialog {
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
 try{
+    if(Integer.parseInt(tamano.getText())>30){
+        JOptionPane.showMessageDialog(this, "el tamaño esta muy grande");
+    }else{
+        
         Proceso proceso= new Proceso();
         String recursos;
         recursos= validarChec();
@@ -313,6 +317,7 @@ try{
         proceso= new Proceso("nuevo", tamano, nombre, id, 1, recursos);
         simulacion.Simulacion.principal.setProceso(proceso);
         dispose();}
+    }
 catch (Exception e){
     if(id_proceso.getText().length()==0){
         JOptionPane.showMessageDialog(this,"El id es un campo Numerio obligatorio");

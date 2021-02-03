@@ -412,7 +412,7 @@ public class Principal extends javax.swing.JFrame {
                 butonNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(butonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 98, 73));
+        getContentPane().add(butonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 610, 100, 80));
 
         botonEjecutar.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         botonEjecutar.setForeground(new java.awt.Color(255, 255, 255));
@@ -428,7 +428,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
         jLabel8.setText("INSERTAR PROCESO");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 120, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, 120, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
         jLabel9.setText("COMENZAR");
