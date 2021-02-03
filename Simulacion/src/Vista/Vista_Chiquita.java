@@ -7,6 +7,7 @@ package Vista;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import simulacion.Proceso;
 import simulacion.Simulacion;
 
@@ -20,11 +21,16 @@ public class Vista_Chiquita extends javax.swing.JDialog {
      * Creates new form Vista_Chiquita
      */
     
-     
+     static int auxid =1;
      List<Proceso>  prosesos = new ArrayList<>();
      public Vista_Chiquita(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        int val=auxid++;
+        int id=val;
+        
+        id_proceso.setText(""+val);
+        
     }
 
 
@@ -103,18 +109,30 @@ public class Vista_Chiquita extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Propiedades"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
+        id_proceso.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
+        id_proceso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        id_proceso.setEnabled(false);
         id_proceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 id_procesoActionPerformed(evt);
             }
         });
 
+        nombre.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
+        nombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        tamano.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
+        tamano.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel1.setText("Id proceso");
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel2.setText("Nombre");
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel3.setText("Tamaño");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -154,9 +172,10 @@ public class Vista_Chiquita extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Recursos"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         Recurso2.setText("R2");
+        Recurso2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Recurso2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Recurso2ActionPerformed(evt);
@@ -164,6 +183,7 @@ public class Vista_Chiquita extends javax.swing.JDialog {
         });
 
         Recurso3.setText("R3");
+        Recurso3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Recurso3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Recurso3ActionPerformed(evt);
@@ -171,12 +191,16 @@ public class Vista_Chiquita extends javax.swing.JDialog {
         });
 
         Recurso4.setText("R4");
+        Recurso4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         Recurso5.setText("R5");
+        Recurso5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         Recurso6.setText("R6");
+        Recurso6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         Recurso1.setText("R1");
+        Recurso1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Recurso1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Recurso1ActionPerformed(evt);
@@ -222,6 +246,7 @@ public class Vista_Chiquita extends javax.swing.JDialog {
         );
 
         botonAceptar.setText("Aceptar");
+        botonAceptar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
@@ -233,29 +258,25 @@ public class Vista_Chiquita extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botonAceptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(botonAceptar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -266,16 +287,42 @@ public class Vista_Chiquita extends javax.swing.JDialog {
     }//GEN-LAST:event_Recurso2ActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        
+try{
         Proceso proceso= new Proceso();
         String recursos;
         recursos= validarChec();
         int id =Integer.parseInt(id_proceso.getText());
         String nombre =this.nombre.getText();
         int tamano =Integer.parseInt(this.tamano.getText());
+        
         proceso= new Proceso("nuevo", tamano, nombre, id, 1, recursos);
         simulacion.Simulacion.principal.setProceso(proceso);
-        dispose();
+        dispose();}
+catch (Exception e){
+    if(id_proceso.getText().length()==0){
+        JOptionPane.showMessageDialog(this,"El id es un campo Numerio obligatorio");
+    }else{
+    try{
+    Integer.parseInt(id_proceso.getText());
+    }
+    catch(Exception b){
+        JOptionPane.showMessageDialog(this,"El id debe ser un digito");
+    }
+    }
+    if(nombre.getText().length()==0){
+        JOptionPane.showMessageDialog(this,"El Nombre es un campo obligatorio");}
+    if(tamano.getText().length()==0){
+        JOptionPane.showMessageDialog(this,"El tamaño es un campo obligatorio");}
+    else{
+    try{
+    Integer.parseInt(tamano.getText());
+    }
+    catch(Exception b){
+        JOptionPane.showMessageDialog(this,"El tamaño debe ser un digito");
+    }}
+    if(validarChec().length()==0){
+        JOptionPane.showMessageDialog(this,"No se a seleccionado ningun recurso");}
+}
         /*agregarProcesos(proceso);
         limpiarvista();*/
     }//GEN-LAST:event_botonAceptarActionPerformed

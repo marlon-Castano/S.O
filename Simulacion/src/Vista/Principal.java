@@ -231,17 +231,29 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         butonNuevo = new javax.swing.JButton();
         botonEjecutar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
 
+        jLabel1.setBackground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Nuevo");
 
+        jLabel2.setBackground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Listo");
 
+        jLabel3.setBackground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("En proceso");
 
+        jLabel4.setBackground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Terminado");
 
+        jScrollPane5.setBackground(new java.awt.Color(0, 102, 102));
+
+        tablaNuevo.setBackground(new java.awt.Color(204, 204, 255));
+        tablaNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablaNuevo.setFont(new java.awt.Font("Yu Gothic UI", 2, 12)); // NOI18N
         tablaNuevo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
@@ -250,10 +262,18 @@ public class Principal extends javax.swing.JFrame {
                 "Proceso", "Peso"
             }
         ));
+        tablaNuevo.setGridColor(new java.awt.Color(0, 0, 0));
+        tablaNuevo.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane5.setViewportView(tablaNuevo);
 
+        jLabel5.setBackground(new java.awt.Color(0, 102, 102));
         jLabel5.setText("Bloqueado");
 
+        jScrollPane6.setBackground(new java.awt.Color(0, 102, 102));
+
+        tablalisto.setBackground(new java.awt.Color(204, 255, 204));
+        tablalisto.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablalisto.setFont(new java.awt.Font("Yu Gothic UI", 3, 12)); // NOI18N
         tablalisto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -264,6 +284,12 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tablalisto);
 
+        jScrollPane7.setBackground(new java.awt.Color(0, 102, 102));
+        jScrollPane7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        tablaBloeado.setBackground(new java.awt.Color(252, 10, 46));
+        tablaBloeado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablaBloeado.setFont(new java.awt.Font("Yu Gothic UI", 2, 12)); // NOI18N
         tablaBloeado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -274,6 +300,11 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(tablaBloeado);
 
+        jScrollPane8.setBackground(new java.awt.Color(0, 102, 102));
+
+        tablarecursos.setBackground(new java.awt.Color(216, 248, 247));
+        tablarecursos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablarecursos.setFont(new java.awt.Font("Yu Gothic UI", 2, 12)); // NOI18N
         tablarecursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -284,6 +315,11 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(tablarecursos);
 
+        jScrollPane9.setBackground(new java.awt.Color(0, 102, 102));
+
+        tablaEnproceso.setBackground(new java.awt.Color(255, 204, 204));
+        tablaEnproceso.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablaEnproceso.setFont(new java.awt.Font("Yu Gothic UI", 2, 12)); // NOI18N
         tablaEnproceso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -294,6 +330,12 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane9.setViewportView(tablaEnproceso);
 
+        jScrollPane10.setBackground(new java.awt.Color(0, 102, 102));
+
+        tablaListaPro.setBackground(new java.awt.Color(0, 0, 0));
+        tablaListaPro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablaListaPro.setFont(new java.awt.Font("Yu Gothic UI", 2, 12)); // NOI18N
+        tablaListaPro.setForeground(new java.awt.Color(255, 255, 255));
         tablaListaPro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -304,8 +346,14 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane10.setViewportView(tablaListaPro);
 
+        jLabel6.setBackground(new java.awt.Color(0, 102, 102));
         jLabel6.setText("Recursos");
 
+        jScrollPane11.setBackground(new java.awt.Color(0, 102, 102));
+
+        tablaTerminado.setBackground(new java.awt.Color(255, 255, 204));
+        tablaTerminado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        tablaTerminado.setFont(new java.awt.Font("Yu Gothic UI", 2, 12)); // NOI18N
         tablaTerminado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -316,21 +364,37 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane11.setViewportView(tablaTerminado);
 
+        jLabel7.setBackground(new java.awt.Color(0, 102, 102));
         jLabel7.setText("lista de procesos");
 
+        butonNuevo.setBackground(new java.awt.Color(0, 0, 0));
+        butonNuevo.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        butonNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        butonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Controlador/iNSERTAR RPOCESO.png"))); // NOI18N
         butonNuevo.setText("Nuevo proceso");
+        butonNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         butonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butonNuevoActionPerformed(evt);
             }
         });
 
+        botonEjecutar.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        botonEjecutar.setForeground(new java.awt.Color(255, 255, 255));
+        botonEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Controlador/1154606.png"))); // NOI18N
         botonEjecutar.setText("Ejecutar");
+        botonEjecutar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonEjecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEjecutarActionPerformed(evt);
             }
         });
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
+        jLabel8.setText("INSERTAR PROCESO");
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 12)); // NOI18N
+        jLabel9.setText("EJECUTAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -359,11 +423,11 @@ public class Principal extends javax.swing.JFrame {
                                         .addGap(248, 248, 248)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                         .addGap(134, 134, 134))
                                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addGap(632, 632, 632)))
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,12 +435,11 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(334, 334, 334))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(185, 185, 185))
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(155, 155, 155))))
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(155, 155, 155))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -384,9 +447,18 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(556, 556, 556)
                                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(butonNuevo)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonEjecutar)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(butonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8))
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel9))
+                                    .addComponent(botonEjecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 740, Short.MAX_VALUE)))
                         .addGap(172, 172, 172))))
         );
         layout.setVerticalGroup(
@@ -403,30 +475,38 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                        .addGap(9, 9, 9)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                        .addGap(109, 109, 109))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(butonNuevo)
-                    .addComponent(botonEjecutar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(butonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonEjecutar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(21, 21, 21))))
         );
 
         pack();
@@ -441,6 +521,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_butonNuevoActionPerformed
 
     private void botonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarActionPerformed
+        limpiarREcursos();
         llenar_recursos();
         Proceso aux = new Proceso();
         limpiarnuevo();
@@ -631,6 +712,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane5;
